@@ -1,0 +1,44 @@
+{
+  "sheet": "construction-sheet.png",
+  "columns": 3,
+  "rows": 2,
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "anchor": {
+    "x": 256,
+    "y": 460
+  },
+  "playOnce": true,
+  "durationMs": 1100,
+  "usage": "Overlay centered on the tower base during construction. Reveal the finished tower as the dust settles. Remove the effect after frame 6.",
+  "frames": [
+    {
+      "file": "construction-01.png",
+      "durationMs": 140
+    },
+    {
+      "file": "construction-02.png",
+      "durationMs": 170
+    },
+    {
+      "file": "construction-03.png",
+      "durationMs": 170
+    },
+    {
+      "file": "construction-04.png",
+      "durationMs": 190
+    },
+    {
+      "file": "construction-05.png",
+      "durationMs": 180
+    },
+    {
+      "file": "construction-06.png",
+      "durationMs": 250
+    }
+  ],
+  "previews": {
+    "webp": "Transparent; loops for review only",
+    "gif": "Forest matte; loops for review only"
+  }
+}

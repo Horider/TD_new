@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": [
+    {
+      "name": "build-frame",
+      "ref": "C:\\Users\\Aleks\\Documents\\ChatGPT\\TD_new\\assets\\ui\\tower-selector\\tower-selector-idle.png",
+      "prompt": "Precise object edit of the provided circular four-sector watercolor menu. REMOVE ALL FOUR CRYSTALS completely and seamlessly fill their places with the matching neutral cream parchment rice-paper watercolor texture. Preserve the exact ring position, size, golden brass rims, FOUR sector divisions, perfectly circular TRANSPARENT central hole and transparent exterior. Blank reusable four-sector UI frame only, no icons, no text, symbols or new buttons. Square canvas unchanged. Genuine alpha transparency."
+    },
+    {
+      "name": "actions-frame",
+      "ref": "C:\\Users\\Aleks\\Documents\\ChatGPT\\TD_new\\assets\\ui\\tower-actions\\tower-actions-yellow-to-level-2-512.png",
+      "prompt": "Precise object edit of the provided circular two-sector watercolor menu. REMOVE BOTH ICONS: remove left shattered crystal including every shard and right intact crystal group completely; fill icon areas seamlessly with matching neutral cream parchment watercolor paper texture. Preserve exact ring geometry and position, golden/brass rims, TWO semicircular sectors divided at top and bottom vertically, transparent circular central hole and exterior. Blank reusable TWO-SECTOR UI frame only, no icons, text, symbols or buttons. Square canvas unchanged. Genuine alpha transparency."
+    },
+    {
+      "name": "broken-yellow",
+      "ref": "C:\\Users\\Aleks\\Documents\\ChatGPT\\TD_new\\assets\\ui\\tower-actions\\tower-actions-yellow-to-level-2-512.png",
+      "prompt": "Extract/redraw ONLY the BROKEN YELLOW CRYSTAL ICON from the LEFT sector of the reference as a standalone transparent game icon. Keep its honey-gold, amber and ivory watercolor rice-paper pigment, recognisable shattered tall crystal composed of separated top pointed fragment, jagged larger lower fragment and 4 smaller angular shards, with clear transparent cracks/gaps. No selector frame, no parchment backing, no ring or square panel, no text, no glow. Icon compact centered in square transparent canvas with generous 20 percent transparent margins. Crisp readable hand-painted silhouette, little light, same art style. All outside and gaps genuinely alpha transparent."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "sheet": "upgrade-sheet-15.png",
+  "columns": 5,
+  "rows": 3,
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "anchor": {
+    "x": 256,
+    "y": 460
+  },
+  "durationMs": 3000,
+  "playOnce": true,
+  "frames": [
+    {
+      "file": "upgrade-01.png",
+      "durationMs": 190
+    },
+    {
+      "file": "upgrade-extra-01.png",
+      "durationMs": 100
+    },
+    {
+      "file": "upgrade-extra-v2-01.png",
+      "durationMs": 100
+    },
+    {
+      "file": "upgrade-02.png",
+      "durationMs": 230
+    },
+    {
+      "file": "upgrade-extra-02.png",
+      "durationMs": 110
+    },
+    {
+      "file": "upgrade-extra-v2-02.png",
+      "durationMs": 120
+    },
+    {
+      "file": "upgrade-03.png",
+      "durationMs": 230
+    },
+    {
+      "file": "upgrade-extra-03.png",
+      "durationMs": 110
+    },
+    {
+      "file": "upgrade-extra-v2-03.png",
+      "durationMs": 120
+    },
+    {
+      "file": "upgrade-04.png",
+      "durationMs": 520
+    },
+    {
+      "file": "upgrade-05.png",
+      "durationMs": 120
+    },
+    {
+      "file": "upgrade-extra-v2-04.png",
+      "durationMs": 120
+    },
+    {
+      "file": "upgrade-extra-04.png",
+      "durationMs": 120
+    },
+    {
+      "file": "upgrade-extra-v2-05.png",
+      "durationMs": 120
+    },
+    {
+      "file": "upgrade-06.png",
+      "durationMs": 690
+    }
+  ]
+}

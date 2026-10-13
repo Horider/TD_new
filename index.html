@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#233c31">
+  <meta name="description" content="Акварельная tower defense: построй янтарные башни и защити четыре лесных рубежа.">
+  <title>Лесной рубеж</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23d4b16d' d='M20 2 34 19 20 38 6 19Z'/%3E%3Cpath fill='%23f3dc9b' d='m20 2-3 17 3 19 7-19Z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="game-screen.css">
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="selector-top-hit" clipPathUnits="objectBoundingBox"><path d="M.17473 .17473A.46 .46 0 0 1 .82527 .17473L.62021 .37979A.17 .17 0 0 0 .37979 .37979Z"/></clipPath>
+      <clipPath id="selector-right-hit" clipPathUnits="objectBoundingBox"><path d="M.82527 .17473A.46 .46 0 0 1 .82527 .82527L.62021 .62021A.17 .17 0 0 0 .62021 .37979Z"/></clipPath>
+      <clipPath id="selector-bottom-hit" clipPathUnits="objectBoundingBox"><path d="M.82527 .82527A.46 .46 0 0 1 .17473 .82527L.37979 .62021A.17 .17 0 0 0 .62021 .62021Z"/></clipPath>
+      <clipPath id="selector-left-hit" clipPathUnits="objectBoundingBox"><path d="M.17473 .82527A.46 .46 0 0 1 .17473 .17473L.37979 .37979A.17 .17 0 0 0 .37979 .62021Z"/></clipPath>
+      <clipPath id="selector-remove-hit" clipPathUnits="objectBoundingBox"><path d="M.5 .04A.46 .46 0 0 0 .5 .96L.5 .67A.17 .17 0 0 1 .5 .33Z"/></clipPath>
+      <clipPath id="selector-upgrade-hit" clipPathUnits="objectBoundingBox"><path d="M.5 .04A.46 .46 0 0 1 .5 .96L.5 .67A.17 .17 0 0 0 .5 .33Z"/></clipPath>
+    </defs>
+    <symbol id="i-crystal" viewBox="0 0 24 24"><path d="m12 2 7 10-7 10-7-10Z"/><path d="M12 2v20M5 12h14"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7 3 5-3 5-3-5Z"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 21V3m0 1c5-4 11 4 16 0v11c-5 4-11-4-16 0"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="m2 5 6-3 8 3 6-3v17l-6 3-8-3-6 3ZM8 2v17M16 5v17"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="3"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
+    <symbol id="i-restart" viewBox="0 0 24 24"><path d="M3 9a9 9 0 1 1 0 6M3 3v6h6"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5ZM16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5ZM17 9l5 6m0-6-5 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+  </svg>
+
+  <div class="game-shell">
+    <main class="stage" id="stage" aria-label="Лесной рубеж — игровое поле">
+      <canvas id="game-canvas" width="1536" height="1024" aria-label="Акварельная карта. Перетаскивай карту и меняй масштаб."></canvas>
+      <div class="pad-layer" id="pad-layer" aria-label="Площадки для строительства"></div>
+      <div class="tower-selector" id="tower-selector" role="menu" aria-label="Выбор башни" hidden>
+        <img class="selector-art" id="selector-art" alt="" draggable="false">
+        <div class="selector-options" id="selector-options"></div>
+        <div class="selector-info" id="selector-info" aria-live="polite"><span id="selector-label"></span><strong id="selector-price"></strong></div>
+        <button class="selector-close" id="selector-close" aria-label="Закрыть селектор" title="Закрыть · Esc"><svg><use href="#i-close"/></svg></button>
+      </div>
+      <div class="game-hud-frame" id="game-hud-frame">
+      <header class="game-hud-top" aria-label="Ресурсы и настройки">
+        <div class="resources" aria-label="Ресурсы">
+          <div class="resource"><svg class="gold"><use href="#i-coin"/></svg><div><span id="gold">360</span><small>Золото</small></div></div>
+          <div class="resource"><svg class="health"><use href="#i-heart"/></svg><div><span id="lives">20</span><small>Жизни</small></div></div>
+          <div class="resource"><svg><use href="#i-wave"/></svg><div><span><b id="wave">0</b><em> / 10</em></span><small>Волна</small></div></div>
+        </div>
+        <nav class="top-actions" aria-label="Настройки игры">
+          <button class="map-toggle" id="maps-button" aria-label="Выбрать локацию" title="Локации"><svg><use href="#i-map"/></svg><span>Локации</span></button>
+          <button class="icon-button" id="sound-button" aria-label="Включить звук" aria-pressed="false" title="Включить звук"><svg><use href="#i-mute"/></svg></button>
+          <button class="icon-button" id="fullscreen-button" aria-label="Развернуть игру на весь экран" aria-pressed="false" title="Полный экран"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+        </nav>
+        <div class="map-heading"><span class="location-dot"></span><h1 id="map-title">Древний лес</h1><span id="map-subtitle">Первый рубеж</span></div>
+        <div class="hud-state"><span class="status-dot" id="status-dot"></span><span id="phase-label">Подготовка</span><span id="kills-label">0 побеждено</span></div>
+      </header>
+      <section class="tower-panel hud-tower" id="tower-panel" aria-label="Характеристики выбранной башни" hidden>
+        <h2 id="tower-name">Янтарная башня</h2><span class="level-badge" id="tower-level">I</span>
+        <dl class="tower-stats"><div><dt>Урон</dt><dd id="tower-damage">18</dd></div><div><dt>Радиус</dt><dd id="tower-range">230</dd></div><div><dt>Выстрел</dt><dd id="tower-rate">0,88 с</dd></div></dl>
+      </section>
+      <p class="field-hint" id="field-hint">Нажми на земляную площадку, чтобы построить башню</p>
+      <footer class="game-hud-bottom" aria-label="Управление игрой">
+        <div class="play-controls">
+          <button class="icon-button" id="restart-button" aria-label="Начать заново" title="Начать заново"><svg><use href="#i-restart"/></svg></button>
+          <button class="icon-button" id="pause-button" aria-label="Пауза" title="Пауза · Пробел"><svg><use href="#i-pause"/></svg></button>
+          <button class="speed-button" id="speed-button" aria-label="Изменить скорость игры">1×</button>
+        </div>
+        <div class="zoom-controls" aria-label="Масштаб карты">
+          <button class="icon-button" id="zoom-out" aria-label="Уменьшить масштаб" title="Уменьшить масштаб"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+          <output id="zoom-label" aria-label="Текущий масштаб">100%</output>
+          <button class="icon-button" id="zoom-in" aria-label="Увеличить масштаб" title="Увеличить масштаб"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></button>
+          <button class="icon-button" id="zoom-fit" aria-label="Показать всю карту" title="Вся карта"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m9 8-2 2m8-2 2 2M9 16l-2-2m8 2 2-2"/></svg></button>
+        </div>
+        <section class="wave-panel" aria-label="Волны врагов">
+          <div class="wave-heading"><h3 id="next-wave-heading">Первая волна</h3><span id="wave-count">10 врагов</span></div>
+          <button class="primary-button wave-button" id="wave-button" disabled><span id="wave-button-label">Начать волну 1</span><svg><use href="#i-play"/></svg></button>
+          <div class="wave-progress" role="progressbar" aria-label="Прогресс волны" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="wave-progress"><div id="wave-progress-fill"></div></div>
+          <div class="enemy-lineup" id="enemy-lineup" hidden></div><p id="wave-help" class="visually-hidden">Сначала построй хотя бы одну башню.</p>
+        </section>
+      </footer>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+      <div class="loading-screen" id="loading-screen"><svg><use href="#i-crystal"/></svg><p id="loading-text">Пробуждаем лес…</p><div class="loading-line"></div></div>
+      <div class="pause-screen" id="pause-screen" hidden><span>Лес подождёт</span><h2>Пауза</h2><button class="primary-button" id="resume-button">Продолжить</button></div>
+    </main>
+  </div>
+  <dialog id="maps-dialog" class="maps-dialog" aria-labelledby="maps-title">
+    <div class="dialog-header"><div><span class="panel-caption">Четыре рубежа</span><h2 id="maps-title">Выбери свой путь</h2></div><button class="icon-button dialog-close" aria-label="Закрыть"><svg><use href="#i-close"/></svg></button></div>
+    <div class="map-grid" id="map-grid"></div>
+    <p class="dialog-footnote">Переход на другую локацию начнёт новую попытку. Рекорды сохраняются.</p>
+  </dialog>
+
+  <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title"><div class="result-emblem"><svg><use href="#i-crystal"/></svg></div><span class="panel-caption" id="result-caption">Рубеж защищён</span><h2 id="result-title">Лес снова спокоен</h2><p id="result-description"></p><div class="result-stats" id="result-stats"></div><button class="primary-button" id="result-next">Следующая локация</button><button class="text-button" id="result-retry">Попробовать ещё раз</button><button class="text-button" id="result-close">Посмотреть карту</button></dialog>
+  <dialog id="restart-dialog" class="confirm-dialog" aria-labelledby="restart-title"><h2 id="restart-title">Начать заново?</h2><p>Башни и прогресс этой попытки будут сброшены.</p><button class="primary-button" id="restart-confirm">Начать заново</button><button class="text-button dialog-close">Продолжить игру</button></dialog>
+  <script type="module" src="game/app.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,75 @@
+{
+  "sheet": "construction-sheet-15.png",
+  "columns": 5,
+  "rows": 3,
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "anchor": {
+    "x": 256,
+    "y": 460
+  },
+  "durationMs": 2000,
+  "playOnce": true,
+  "frames": [
+    {
+      "file": "construction-01.png",
+      "durationMs": 130
+    },
+    {
+      "file": "construction-extra-01.png",
+      "durationMs": 60
+    },
+    {
+      "file": "construction-extra-v2-01.png",
+      "durationMs": 60
+    },
+    {
+      "file": "construction-02.png",
+      "durationMs": 150
+    },
+    {
+      "file": "construction-extra-02.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-extra-v2-02.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-03.png",
+      "durationMs": 150
+    },
+    {
+      "file": "construction-extra-03.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-extra-v2-03.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-04.png",
+      "durationMs": 350
+    },
+    {
+      "file": "construction-05.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-extra-v2-04.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-extra-04.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-extra-v2-05.png",
+      "durationMs": 80
+    },
+    {
+      "file": "construction-06.png",
+      "durationMs": 460
+    }
+  ]
+}

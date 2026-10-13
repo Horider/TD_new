@@ -1,0 +1,64 @@
+{
+  "canvas": [
+    1024,
+    1024
+  ],
+  "silhouetteHeight": 860,
+  "top": 72,
+  "bottom": 932,
+  "alphaThreshold": 128,
+  "levels": [
+    {
+      "file": "archer-level-1.png",
+      "bounds": {
+        "l": 208,
+        "t": 72,
+        "r": 816,
+        "b": 932,
+        "w": 608,
+        "h": 860,
+        "iw": 1024,
+        "ih": 1024
+      }
+    },
+    {
+      "file": "archer-level-2.png",
+      "bounds": {
+        "l": 209,
+        "t": 72,
+        "r": 815,
+        "b": 932,
+        "w": 606,
+        "h": 860,
+        "iw": 1024,
+        "ih": 1024
+      }
+    },
+    {
+      "file": "archer-level-3.png",
+      "bounds": {
+        "l": 208,
+        "t": 72,
+        "r": 816,
+        "b": 932,
+        "w": 608,
+        "h": 860,
+        "iw": 1024,
+        "ih": 1024
+      }
+    },
+    {
+      "file": "archer-level-4.png",
+      "bounds": {
+        "l": 209,
+        "t": 72,
+        "r": 816,
+        "b": 932,
+        "w": 607,
+        "h": 860,
+        "iw": 1024,
+        "ih": 1024
+      }
+    }
+  ]
+}

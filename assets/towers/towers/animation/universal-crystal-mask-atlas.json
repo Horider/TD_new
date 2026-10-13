@@ -1,0 +1,23 @@
+{
+  "image": "universal-crystal-mask-atlas.png",
+  "levels": {
+    "1": {
+      "x": 0,
+      "y": 0,
+      "width": 969,
+      "height": 1754
+    },
+    "2": {
+      "x": 969,
+      "y": 0,
+      "width": 910,
+      "height": 1722
+    },
+    "3": {
+      "x": 1879,
+      "y": 0,
+      "width": 940,
+      "height": 1756
+    }
+  }
+}

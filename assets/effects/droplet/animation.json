@@ -1,0 +1,32 @@
+{
+  "frame_size": [
+    512,
+    384
+  ],
+  "frame_count": 5,
+  "stages": [
+    "formation",
+    "stretch",
+    "flight",
+    "impact",
+    "fade"
+  ],
+  "duration_ms": [
+    130,
+    110,
+    180,
+    100,
+    210
+  ],
+  "sheet_columns": 3,
+  "sheet_rows": 2,
+  "flight_head_anchor": [
+    420,
+    192
+  ],
+  "levels": [
+    1,
+    2,
+    3
+  ]
+}

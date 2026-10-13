@@ -1,0 +1,5 @@
+{
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "prompt": "Edit this FOUR-sprite 2x2 transparent sprite sheet. Preserve the four different poses and watercolor art. Critical repairs: REMOVE ALL neon yellow, red, pink and white fringe/mask artifacts around dust; edges must be natural soft cream/tan/gray watercolor alpha, not colored fringes. There must be ZERO red or yellow masking debris. Shrink each sprite uniformly inside its OWN quadrant to fit fully without any cropping. Place each sprite at the same horizontal center of its square cell, bottom dust baseline at 90% of cell height. Leave at least 8% transparent padding along all four cell borders and across the central horizontal/vertical gutter; no part of any sprite touches/crosses its cell. Small flying particles may be reduced to stay inside. Keep quadrant order unchanged, same tools and evolving dust forms, no tower or background. Four cells total, square image 2x2 grid, true transparent PNG. No text, lines, frame labels, no shadows or aura outside each sprite. Clean production animation assets with semitransparent dust."
+}

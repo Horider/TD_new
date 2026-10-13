@@ -1,0 +1,20 @@
+{
+  "frames": [
+    "pad-01.png",
+    "pad-02.png",
+    "pad-03.png",
+    "pad-04.png",
+    "pad-05.png",
+    "pad-06.png"
+  ],
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "anchor": {
+    "x": 256,
+    "y": 256
+  },
+  "durationMs": 900,
+  "playOnce": true,
+  "trigger": "pointer enter or keyboard/touch focus",
+  "static": "pad.png"
+}
