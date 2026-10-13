@@ -66,8 +66,8 @@ test('menu stays centered on the rendered tower and scales with the same camera 
       }
     }
   }
-  const small=selectorPosition(1440,900,768,512,viewTransform(1440,900,.7));
-  const large=selectorPosition(1440,900,768,512,viewTransform(1440,900,1));
+  const small=selectorPosition(1440,900,768,512,viewTransform(1440,900,1));
+  const large=selectorPosition(1440,900,768,512,viewTransform(1440,900,1.4));
   assert.ok(large.size>small.size);
   for (const image of SELECTOR_IMAGES) assert.ok(existsSync(new URL(`../${image}`, import.meta.url)), image);
 });

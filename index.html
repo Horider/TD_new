@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#233c31">
-  <meta name="game-version" content="20261014-landscape-1">
+  <meta name="game-version" content="20261014-map-only-1">
   <meta name="description" content="Акварельная tower defense: построй янтарные башни и защити четыре лесных рубежа.">
   <title>Лесной рубеж</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23d4b16d' d='M20 2 34 19 20 38 6 19Z'/%3E%3Cpath fill='%23f3dc9b' d='m20 2-3 17 3 19 7-19Z'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20261014-landscape-1">
-  <link rel="stylesheet" href="game-screen.css?v=20261014-landscape-1">
+  <link rel="stylesheet" href="styles.css?v=20261014-map-only-1">
+  <link rel="stylesheet" href="game-screen.css?v=20261014-map-only-1">
 </head>
 <body>
   <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
         <img class="selector-art" id="selector-art" alt="" draggable="false">
         <div class="selector-options" id="selector-options"></div>
         <div class="selector-info" id="selector-info" aria-live="polite"><span id="selector-label"></span><strong id="selector-price"></strong></div>
-        <button class="selector-close" id="selector-close" aria-label="Закрыть селектор" title="Закрыть · Esc"><svg><use href="#i-close"/></svg></button>
+        <button class="selector-close" id="selector-close" aria-label="Закрыть селектор"><svg><use href="#i-close"/></svg></button>
       </div>
       <div class="game-hud-frame" id="game-hud-frame">
       <header class="game-hud-top" aria-label="Ресурсы и настройки">
@@ -58,9 +58,9 @@
           <div class="resource"><svg><use href="#i-wave"/></svg><div><span><b id="wave">0</b><em> / 10</em></span><small>Волна</small></div></div>
         </div>
         <nav class="top-actions" aria-label="Настройки игры">
-          <button class="map-toggle" id="maps-button" aria-label="Выбрать локацию" title="Локации"><svg><use href="#i-map"/></svg><span>Локации</span></button>
-          <button class="icon-button" id="sound-button" aria-label="Включить звук" aria-pressed="false" title="Включить звук"><svg><use href="#i-mute"/></svg></button>
-          <button class="icon-button" id="fullscreen-button" aria-label="Развернуть игру на весь экран" aria-pressed="false" title="Полный экран"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+          <button class="map-toggle" id="maps-button" aria-label="Выбрать локацию"><svg><use href="#i-map"/></svg><span>Локации</span></button>
+          <button class="icon-button" id="sound-button" aria-label="Включить звук" aria-pressed="false"><svg><use href="#i-mute"/></svg></button>
+          <button class="icon-button" id="fullscreen-button" aria-label="Развернуть игру на весь экран" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
         </nav>
         <div class="map-heading"><span class="location-dot"></span><h1 id="map-title">Древний лес</h1><span id="map-subtitle">Первый рубеж</span></div>
         <div class="hud-state"><span class="status-dot" id="status-dot"></span><span id="phase-label">Подготовка</span><span id="kills-label">0 побеждено</span></div>
@@ -72,15 +72,15 @@
       <p class="field-hint" id="field-hint">Нажми на земляную площадку, чтобы построить башню</p>
       <footer class="game-hud-bottom" aria-label="Управление игрой">
         <div class="play-controls">
-          <button class="icon-button" id="restart-button" aria-label="Начать заново" title="Начать заново"><svg><use href="#i-restart"/></svg></button>
-          <button class="icon-button" id="pause-button" aria-label="Пауза" title="Пауза · Пробел"><svg><use href="#i-pause"/></svg></button>
+          <button class="icon-button" id="restart-button" aria-label="Начать заново"><svg><use href="#i-restart"/></svg></button>
+          <button class="icon-button" id="pause-button" aria-label="Пауза"><svg><use href="#i-pause"/></svg></button>
           <button class="speed-button" id="speed-button" aria-label="Изменить скорость игры">1×</button>
         </div>
         <div class="zoom-controls" aria-label="Масштаб карты">
-          <button class="icon-button" id="zoom-out" aria-label="Уменьшить масштаб" title="Уменьшить масштаб"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+          <button class="icon-button" id="zoom-out" aria-label="Уменьшить масштаб"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
           <output id="zoom-label" aria-label="Текущий масштаб">100%</output>
-          <button class="icon-button" id="zoom-in" aria-label="Увеличить масштаб" title="Увеличить масштаб"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></button>
-          <button class="icon-button" id="zoom-fit" aria-label="Показать всю карту" title="Вся карта"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m9 8-2 2m8-2 2 2M9 16l-2-2m8 2 2-2"/></svg></button>
+          <button class="icon-button" id="zoom-in" aria-label="Увеличить масштаб"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></button>
+          <button class="icon-button" id="zoom-fit" aria-label="Показать всю карту"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m9 8-2 2m8-2 2 2M9 16l-2-2m8 2 2-2"/></svg></button>
         </div>
         <section class="wave-panel" aria-label="Волны врагов">
           <div class="wave-heading"><h3 id="next-wave-heading">Первая волна</h3><span id="wave-count">10 врагов</span></div>
@@ -103,7 +103,7 @@
 
   <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title"><div class="result-emblem"><svg><use href="#i-crystal"/></svg></div><span class="panel-caption" id="result-caption">Рубеж защищён</span><h2 id="result-title">Лес снова спокоен</h2><p id="result-description"></p><div class="result-stats" id="result-stats"></div><button class="primary-button" id="result-next">Следующая локация</button><button class="text-button" id="result-retry">Попробовать ещё раз</button><button class="text-button" id="result-close">Посмотреть карту</button></dialog>
   <dialog id="restart-dialog" class="confirm-dialog" aria-labelledby="restart-title"><h2 id="restart-title">Начать заново?</h2><p>Башни и прогресс этой попытки будут сброшены.</p><button class="primary-button" id="restart-confirm">Начать заново</button><button class="text-button dialog-close">Продолжить игру</button></dialog>
-  <script type="module" src="game/app.js?v=20261014-landscape-1"></script>
+  <script type="module" src="game/app.js?v=20261014-map-only-1"></script>
 </body>
 </html>
 

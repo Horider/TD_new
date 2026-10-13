@@ -1,11 +1,11 @@
-import { MAPS, LEVELS, ENEMY_TYPES } from './maps.js?v=20261014-landscape-1';
-import { Game, TOTAL_WAVES, wavePlan, pointOnPath, towerHeight } from './engine.js?v=20261014-landscape-1';
-import { createTowerSelector, selectorAnchor, SELECTOR_IMAGES } from './tower-selector.js?v=20261014-landscape-1';
-import { createGameView, MAX_ZOOM } from './view.js?v=20261014-landscape-1';
-import { CONSTRUCTION_IMAGES, CONSTRUCTION_DURATION, constructionFrame, constructionReveal } from './construction.js?v=20261014-landscape-1';
-import { UPGRADE_IMAGES, UPGRADE_DURATION, upgradeFrame, upgradeReveal } from './upgrade.js?v=20261014-landscape-1';
-import { PAD_IMAGES, PAD_WIDTH, PAD_HEIGHT, padFrame } from './pad-animation.js?v=20261014-landscape-1';
-import { visibleMapBounds } from './hud-frame.js?v=20261014-landscape-1';
+import { MAPS, LEVELS, ENEMY_TYPES } from './maps.js?v=20261014-map-only-1';
+import { Game, TOTAL_WAVES, wavePlan, pointOnPath, towerHeight } from './engine.js?v=20261014-map-only-1';
+import { createTowerSelector, selectorAnchor, SELECTOR_IMAGES } from './tower-selector.js?v=20261014-map-only-1';
+import { createGameView, MAX_ZOOM } from './view.js?v=20261014-map-only-1';
+import { CONSTRUCTION_IMAGES, CONSTRUCTION_DURATION, constructionFrame, constructionReveal } from './construction.js?v=20261014-map-only-1';
+import { UPGRADE_IMAGES, UPGRADE_DURATION, upgradeFrame, upgradeReveal } from './upgrade.js?v=20261014-map-only-1';
+import { PAD_IMAGES, PAD_WIDTH, PAD_HEIGHT, padFrame } from './pad-animation.js?v=20261014-map-only-1';
+import { visibleMapBounds } from './hud-frame.js?v=20261014-map-only-1';
 
 const $ = id => document.getElementById(id);
 const canvas = $('game-canvas');
@@ -200,7 +200,6 @@ function updateHud() {
   $('status-dot').classList.toggle('active', game.status === 'active' && !game.paused);
   $('pause-screen').hidden = !game.paused || game.ended || loading || !!document.querySelector('dialog[open]');
   $('pause-button').setAttribute('aria-label', game.paused ? 'Продолжить игру' : 'Пауза');
-  $('pause-button').title = game.paused ? 'Продолжить · Пробел' : 'Пауза · Пробел';
   $('pause-button').innerHTML = `<svg><use href="#i-${game.paused?'play':'pause'}"/></svg>`;
   $('pause-button').disabled = game.ended || loading;
   $('speed-button').textContent = `${speed}×`;
@@ -213,7 +212,8 @@ function updateHud() {
   const progress = game.waveTotal ? Math.round((game.waveTotal-game.remaining)/game.waveTotal*100) : 0;
   $('wave-progress-fill').style.width = `${progress}%`;
   $('wave-progress').setAttribute('aria-valuenow', progress);
-  $('wave-button-label').textContent = game.ended ? 'Выбрать локацию' : active ? 'Оборона в бою' : `Начать волну ${game.wave+1}`;
+  $('wave-button-label').textContent = game.ended ? '✓' : String(active ? game.wave : game.wave+1);
+  $('wave-button').setAttribute('aria-label',game.ended ? 'Выбрать локацию' : active ? `Волна ${game.wave}` : `Начать волну ${game.wave+1}`);
   $('wave-button').disabled = loading || (!game.ended && (active || game.paused || !game.towers.length));
   $('wave-help').textContent = game.ended ? 'Попробуй другой маршрут.' : !game.towers.length ? 'Сначала построй хотя бы одну башню.' : active ? 'Можно строить и улучшать во время волны.' : `Награда за волну: ${35+(game.wave+1)*8} золота.`;
   const key = `${game.map.id}:${game.wave}:${game.status}`;
@@ -278,7 +278,6 @@ async function selectMap(map) {
     const image = await loadImage(map.image);
     if (version !== loadVersion) return;
     mapImage = image;
-    $('stage').style.setProperty('--map-backdrop', `url("${map.image}")`);
     art.maps.set(map.id, image);
     game = new Game(map);
     gameView.reset();
@@ -536,7 +535,6 @@ $('sound-button').addEventListener('click',async()=>{
   catch{soundEnabled=false;toast('Звук недоступен в этом браузере.');}
   $('sound-button').setAttribute('aria-pressed',String(soundEnabled));
   $('sound-button').setAttribute('aria-label',soundEnabled?'Выключить звук':'Включить звук');
-  $('sound-button').title=soundEnabled?'Выключить звук':'Включить звук';
   $('sound-button').innerHTML=`<svg><use href="#i-${soundEnabled?'sound':'mute'}"/></svg>`;
 });
 canvas.addEventListener('click',e=>{

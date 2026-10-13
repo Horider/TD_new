@@ -1,6 +1,6 @@
-import { LEVELS } from './maps.js?v=20261014-landscape-1';
-import { towerHeight } from './engine.js?v=20261014-landscape-1';
-import { viewTransform } from './view.js?v=20261014-landscape-1';
+import { LEVELS } from './maps.js?v=20261014-map-only-1';
+import { towerHeight } from './engine.js?v=20261014-map-only-1';
+import { viewTransform } from './view.js?v=20261014-map-only-1';
 
 const BUILD_ART = 'assets/ui/tower-selector/layers/build-frame-512.png';
 const BROKEN_ICON = 'assets/ui/tower-selector/layers/broken-yellow-512.png';

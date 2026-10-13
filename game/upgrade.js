@@ -1,4 +1,4 @@
-import { CONSTRUCTION_SEQUENCE, CONSTRUCTION_DURATION, constructionFrame, constructionReveal } from './construction.js?v=20261014-landscape-1';
+import { CONSTRUCTION_SEQUENCE, CONSTRUCTION_DURATION, constructionFrame, constructionReveal } from './construction.js?v=20261014-map-only-1';
 
 // Both fifteen-frame effects share their rhythm and base anchor.
 export const UPGRADE_DURATION = 1.9;

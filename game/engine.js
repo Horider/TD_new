@@ -1,6 +1,6 @@
-import { LEVELS, ENEMY_TYPES } from './maps.js?v=20261014-landscape-1';
-import { CONSTRUCTION_DURATION } from './construction.js?v=20261014-landscape-1';
-import { UPGRADE_DURATION } from './upgrade.js?v=20261014-landscape-1';
+import { LEVELS, ENEMY_TYPES } from './maps.js?v=20261014-map-only-1';
+import { CONSTRUCTION_DURATION } from './construction.js?v=20261014-map-only-1';
+import { UPGRADE_DURATION } from './upgrade.js?v=20261014-map-only-1';
 
 export const TOTAL_WAVES = 10;
 export const START_GOLD = 360;

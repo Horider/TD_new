@@ -224,8 +224,8 @@ const { chromium } = playwright;
     await touchPage.goto('http://127.0.0.1:4184/',{waitUntil:'networkidle'});
     await touchPage.locator('#loading-screen').waitFor({state:'hidden'});
     assert.equal(await touchPage.locator('.orientation-hint').isVisible(),false,'landscape has no rotation hint');
-    assert.equal(await touchPage.locator('meta[name="game-version"]').getAttribute('content'),'20261014-landscape-1');
-    assert.match(await touchPage.locator('script[type="module"]').getAttribute('src'),/\?v=20261014-landscape-1$/);
+    assert.equal(await touchPage.locator('meta[name="game-version"]').getAttribute('content'),'20261014-map-only-1');
+    assert.match(await touchPage.locator('script[type="module"]').getAttribute('src'),/\?v=20261014-map-only-1$/);
     await touchPage.locator('#zoom-fit').tap();
     for(const pad of [0,4,8]) {
       const before=await touchPage.locator('#zoom-label').textContent();
