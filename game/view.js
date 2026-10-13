@@ -1,5 +1,4 @@
 const MAP_WIDTH = 1536, MAP_HEIGHT = 1024;
-import { visibleMapBounds } from './hud-frame.js';
 export const MAX_ZOOM = 3;
 
 export function viewTransform(width, height, zoom = 1, centerX = 768, centerY = 512) {
@@ -91,42 +90,6 @@ export function createGameView({ stage, canvas, onChange }) {
     zoomBy: (factor, anchor) => setZoom(zoom * factor, anchor),
     fit() { zoom = transform().fitZoom; centerX = 768; centerY = 512; emit('fit'); },
     reset() { zoom = 1; centerX = 768; centerY = 512; emit('reset'); },
-    reveal(x, y, menuSize) {
-      let bounds=visibleMapBounds(transform());
-      const minimumHeight=menuSize+(width<620?320:height<480?150:245);
-      if(bounds.height<Math.min(height,minimumHeight)) {
-        const before=worldToScreen(x,y);
-        zoom=Math.min(MAX_ZOOM,zoom*Math.min(height,minimumHeight)/Math.max(1,bounds.height));
-        const scale=transform().scale;
-        centerX=x-(before.x-width/2)/scale;centerY=y-(before.y-height/2)/scale;
-        clampCenter();bounds=visibleMapBounds(transform());
-      }
-      for(let attempt=0;attempt<4;attempt++) {
-        const t=transform();bounds=visibleMapBounds(t);
-        menuSize=Math.min(224,Math.max(132,210*t.scale));
-        const half=menuSize/2+10, landscape=bounds.height<480&&bounds.width>=480;
-        const top=landscape?68:bounds.width<620?145:125, bottom=landscape?100:bounds.width<620?140:100;
-        const required=Math.max(t.scale,half/Math.max(1,x),half/Math.max(1,1536-x),(top+half)/Math.max(1,y),(bottom+half)/Math.max(1,1024-y));
-        if(required<=t.scale+.001 || zoom>=MAX_ZOOM) break;
-        const before=worldToScreen(x,y);
-        zoom=Math.min(MAX_ZOOM,zoom*required/t.scale);
-        const scale=transform().scale;
-        centerX=x-(before.x-width/2)/scale;centerY=y-(before.y-height/2)/scale;
-        clampCenter();
-      }
-      bounds=visibleMapBounds(transform());
-      const point = worldToScreen(x, y), half = menuSize / 2 + 10;
-      const landscape=bounds.height<480&&bounds.width>=480;
-      const top = landscape?68:bounds.width<620?145:125;
-      const bottom = landscape?100:bounds.width<620?140:100;
-      const clamp = (n, min, max) => min > max ? (min + max) / 2 : Math.max(min, Math.min(max, n));
-      const targetX = clamp(point.x, bounds.left+half, bounds.left+bounds.width-half);
-      const targetY = clamp(point.y, bounds.top+top+half, bounds.top+bounds.height-bottom-half);
-      const scale = transform().scale;
-      centerX += (point.x - targetX) / scale;
-      centerY += (point.y - targetY) / scale;
-      clampCenter();emit('reveal');
-    },
     prepare(ctx) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);

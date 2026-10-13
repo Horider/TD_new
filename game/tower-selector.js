@@ -55,6 +55,10 @@ export function createTowerSelector({ element, stage, view, onAction, onClose, o
     if (!anchor || element.hidden) return;
     const rect = stage.getBoundingClientRect();
     const point = selectorPosition(rect.width, rect.height, ...anchor, view.transform());
+    // Keep the menu reachable at screen edges without changing the player's camera.
+    const half = point.size / 2;
+    point.x = Math.max(half + 8, Math.min(rect.width - half - 8, point.x));
+    point.y = Math.max(half + 8, Math.min(rect.height - half - 42, point.y));
     element.style.setProperty('--selector-size', `${point.size}px`);
     element.style.width = `${point.size}px`;
     element.style.height = `${point.size}px`;
@@ -114,11 +118,7 @@ export function createTowerSelector({ element, stage, view, onAction, onClose, o
   new ResizeObserver(position).observe(stage);
 
   return {
-    reposition({ ensureVisible = false } = {}) {
-      if (ensureVisible && anchor && !element.hidden) {
-        const rect=stage.getBoundingClientRect();
-        view.reveal(...anchor,selectorPosition(rect.width,rect.height,...anchor,view.transform()).size);
-      }
+    reposition() {
       position();
     },
     sync(game, selected, { hidden = false } = {}) {
@@ -126,7 +126,6 @@ export function createTowerSelector({ element, stage, view, onAction, onClose, o
       if (!next) { element.hidden = true; pad = -1; return; }
       const opening = element.hidden || pad !== selected;
       const nextKey = `${selected}:${next.mode}:${next.options.map(option => option.icon).join(',')}`;
-      const changed = key !== nextKey;
       state = next; pad = selected; anchor = selectorAnchor(game, selected);
       element.hidden = false;
       element.dataset.mode = state.mode;
@@ -146,11 +145,6 @@ export function createTowerSelector({ element, stage, view, onAction, onClose, o
       }
       if (!state.options.some(option => option.action === activeAction)) activeAction = state.defaultAction;
       highlight(opening ? state.defaultAction : activeAction, !opening && options.contains(document.activeElement));
-      if (opening || changed) {
-        const rect = stage.getBoundingClientRect();
-        const size = selectorPosition(rect.width, rect.height, ...anchor, view.transform()).size;
-        view.reveal(...anchor, size);
-      }
       position();
       if (opening) options.querySelector(`[data-action="${state.defaultAction}"]`)?.focus({ preventScroll: true });
     },

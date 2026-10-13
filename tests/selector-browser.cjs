@@ -164,8 +164,10 @@ const { chromium } = playwright;
     await page.setViewportSize({ width: 390, height: 844 });
     for (const pad of [0, 4, 8]) {
       await page.locator('#zoom-fit').click();
+      const cameraBefore=await page.evaluate(()=>forestWard.view.transform());
       await page.locator(`[data-pad="${pad}"]`).focus();
       await page.keyboard.press('Enter');
+      assert.deepEqual(await page.evaluate(()=>forestWard.view.transform()),cameraBefore,'opening edge selectors preserves zoom and map position');
       const box = await menu.boundingBox(), stage = await page.locator('#stage').boundingBox();
       assert.ok(box.x >= stage.x + 7 && box.y >= stage.y + 7);
       assert.ok(box.x + box.width <= stage.x + stage.width - 7);

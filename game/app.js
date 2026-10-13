@@ -22,7 +22,7 @@ let records = {};
 try { records = JSON.parse(localStorage.getItem('forest-ward-records') || '{}'); } catch { /* Storage may be disabled. */ }
 const gameView = createGameView({ stage: $('stage'), canvas, onChange: (_,reason) => {
   updateGameHudBounds();
-  updatePadPositions(); towerSelector.reposition({ensureVisible:reason==='resize'||reason==='zoom'}); updateZoomControls(); draw();
+  updatePadPositions(); towerSelector.reposition(); updateZoomControls(); draw();
 } });
 const towerSelector = createTowerSelector({
   element: $('tower-selector'), stage: $('stage'), view: gameView,
