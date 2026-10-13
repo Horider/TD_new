@@ -1,11 +1,11 @@
-import { MAPS, LEVELS, ENEMY_TYPES } from './maps.js';
-import { Game, TOTAL_WAVES, wavePlan, pointOnPath, towerHeight } from './engine.js';
-import { createTowerSelector, selectorAnchor, SELECTOR_IMAGES } from './tower-selector.js';
-import { createGameView, MAX_ZOOM } from './view.js';
-import { CONSTRUCTION_IMAGES, CONSTRUCTION_DURATION, constructionFrame, constructionReveal } from './construction.js';
-import { UPGRADE_IMAGES, UPGRADE_DURATION, upgradeFrame, upgradeReveal } from './upgrade.js';
-import { PAD_IMAGES, PAD_WIDTH, PAD_HEIGHT, padFrame } from './pad-animation.js';
-import { visibleMapBounds } from './hud-frame.js';
+import { MAPS, LEVELS, ENEMY_TYPES } from './maps.js?v=20261014-landscape-1';
+import { Game, TOTAL_WAVES, wavePlan, pointOnPath, towerHeight } from './engine.js?v=20261014-landscape-1';
+import { createTowerSelector, selectorAnchor, SELECTOR_IMAGES } from './tower-selector.js?v=20261014-landscape-1';
+import { createGameView, MAX_ZOOM } from './view.js?v=20261014-landscape-1';
+import { CONSTRUCTION_IMAGES, CONSTRUCTION_DURATION, constructionFrame, constructionReveal } from './construction.js?v=20261014-landscape-1';
+import { UPGRADE_IMAGES, UPGRADE_DURATION, upgradeFrame, upgradeReveal } from './upgrade.js?v=20261014-landscape-1';
+import { PAD_IMAGES, PAD_WIDTH, PAD_HEIGHT, padFrame } from './pad-animation.js?v=20261014-landscape-1';
+import { visibleMapBounds } from './hud-frame.js?v=20261014-landscape-1';
 
 const $ = id => document.getElementById(id);
 const canvas = $('game-canvas');

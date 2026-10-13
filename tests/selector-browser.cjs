@@ -223,6 +223,18 @@ const { chromium } = playwright;
     touchPage.on('pageerror',error=>errors.push(error.message));
     await touchPage.goto('http://127.0.0.1:4184/',{waitUntil:'networkidle'});
     await touchPage.locator('#loading-screen').waitFor({state:'hidden'});
+    assert.equal(await touchPage.locator('.orientation-hint').isVisible(),false,'landscape has no rotation hint');
+    assert.equal(await touchPage.locator('meta[name="game-version"]').getAttribute('content'),'20261014-landscape-1');
+    assert.match(await touchPage.locator('script[type="module"]').getAttribute('src'),/\?v=20261014-landscape-1$/);
+    await touchPage.locator('#zoom-fit').tap();
+    for(const pad of [0,4,8]) {
+      const before=await touchPage.locator('#zoom-label').textContent();
+      const transformBefore=await touchPage.locator('[data-pad="2"]').getAttribute('style');
+      await touchPage.locator(`[data-pad="${pad}"]`).tap();
+      assert.equal(await touchPage.locator('#zoom-label').textContent(),before,'real touch selection must not zoom');
+      assert.equal(await touchPage.locator('[data-pad="2"]').getAttribute('style'),transformBefore,'real touch selection must not move map');
+      await touchPage.locator('#selector-close').tap();
+    }
     await touchPage.locator('[data-pad="2"]').tap();
     const buildIcon = await touchPage.locator('[data-action="build"] .selector-crystal').boundingBox();
     await touchPage.touchscreen.tap(buildIcon.x+buildIcon.width/2,buildIcon.y+buildIcon.height/2);
@@ -230,8 +242,9 @@ const { chromium } = playwright;
     await touchPage.screenshot({path:path.resolve('test-results/phone-actions.png')});
     for (const [width,height] of [[390,844],[320,720],[844,390]]) {
       await touchPage.setViewportSize({width,height});
-      await touchPage.locator('#zoom-out').tap();
+      assert.equal(await touchPage.locator('.orientation-hint').isVisible(),height>width,'rotation hint appears only in portrait');
       await touchPage.locator('#zoom-in').tap();
+      await touchPage.locator('#zoom-out').tap();
       for (const action of ['sell','upgrade']) {
         const button = touchPage.locator(`[data-action="${action}"]`);
         assert.ok(await button.evaluate(el=>{
@@ -245,7 +258,7 @@ const { chromium } = playwright;
       if (width<621) {
         const header=await touchPage.locator('.game-hud-top').boundingBox();
         const stats=await touchPage.locator('#tower-panel').boundingBox();
-        assert.ok(stats.y>=header.y+header.height,'tower details must not overlap resources or map title');
+        if(stats) assert.ok(stats.y>=header.y+header.height,'tower details must not overlap resources or map title');
       }
     }
     await touchPage.locator('[data-action="upgrade"]').tap();

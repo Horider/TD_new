@@ -11,6 +11,7 @@ export function viewTransform(width, height, zoom = 1, centerX = 768, centerY = 
 
 export function createGameView({ stage, canvas, onChange }) {
   let width = 1, height = 1, zoom = 1, centerX = 768, centerY = 512, dpr = 1;
+  let overview = false;
   let dragging = false, travelled = 0, suppressClickUntil = 0;
   const pointers = new Map();
   const transform = () => viewTransform(width, height, zoom, centerX, centerY);
@@ -28,11 +29,12 @@ export function createGameView({ stage, canvas, onChange }) {
     width = Math.max(1, rect.width); height = Math.max(1, rect.height);
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
-    zoom = Math.max(transform().minZoom, Math.min(MAX_ZOOM, zoom));
+    zoom = overview ? transform().fitZoom : Math.max(transform().minZoom, Math.min(MAX_ZOOM, zoom));
     clampCenter();
     emit('resize');
   }
   function setZoom(next, anchor = { x: width / 2, y: height / 2 }) {
+    overview = false;
     const before = screenToWorld(anchor.x, anchor.y);
     zoom = Math.max(transform().minZoom, Math.min(MAX_ZOOM, next));
     const scale = transform().scale;
@@ -88,8 +90,8 @@ export function createGameView({ stage, canvas, onChange }) {
   return {
     transform, worldToScreen, screenToWorld,
     zoomBy: (factor, anchor) => setZoom(zoom * factor, anchor),
-    fit() { zoom = transform().fitZoom; centerX = 768; centerY = 512; emit('fit'); },
-    reset() { zoom = 1; centerX = 768; centerY = 512; emit('reset'); },
+    fit() { overview = true; zoom = transform().fitZoom; centerX = 768; centerY = 512; emit('fit'); },
+    reset() { overview = window.matchMedia('(pointer: coarse)').matches; zoom = overview ? transform().fitZoom : 1; centerX = 768; centerY = 512; emit('reset'); },
     prepare(ctx) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
